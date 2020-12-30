@@ -10,7 +10,7 @@ router.post("/blogs", auth, async (req, res) => {
   // let readtime = Math.round(body.length / 200);
   if (!stars) stars = 4;
 
-  category = category.toLowerCase().replace(" ", "").split(",");
+  category = !category ? "misc" : category.toLowerCase().replace(" ", "").split(",");
 
   const blog = new Blog({ title, body, category, stars, owner });
 
