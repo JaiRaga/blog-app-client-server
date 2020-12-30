@@ -14,6 +14,9 @@ const theme = createMuiTheme({
     },
     background: {
       default: "#feceab"
+    },
+    update: {
+      main: "#ccc"
     }
   },
   overrides: {
