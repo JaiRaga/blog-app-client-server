@@ -57,8 +57,9 @@ const CreateBlog = () => {
           required
           type='text'
           onChange={onChange}
-          // error
-          // helperText='Error'
+          value={blog.title}
+        // error
+        // helperText='Error'
         />
       </Grid>
 
@@ -76,8 +77,9 @@ const CreateBlog = () => {
           required
           type='text'
           onChange={onChange}
-          // error
-          // helperText='Error'
+          value={blog.body}
+        // error
+        // helperText='Error'
         />
       </Grid>
 
