@@ -29,8 +29,9 @@ export const postBlog = (blog) => async (dispatch) => {
   // console.log(data);
 
   try {
+    console.log(1)
     const res = await axios.post("/api/blogs", data, config);
-    // console.log("Blogs POST", res.data);
+    console.log("Blogs POST", res.data);
     dispatch({ type: POST_BLOG, payload: res.data });
   } catch (err) {
     dispatch({ type: BLOG_ERROR });
