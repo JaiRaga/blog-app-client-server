@@ -45,12 +45,15 @@ export const registerUser = ({ username, handle, email, password }) => async (
   const body = JSON.stringify({ username, handle, email, password });
 
   try {
+    console.log(1)
     const res = await axios.post("/api/register", body, config);
-    console.log(res);
+    console.log(2, res);
     dispatch({ type: REGISTER_SUCCESS, payload: res.data });
-    dispatch(loadUser());
+    console.log(3)
+    loadUser();
+    console.log(4)
   } catch (err) {
-    dispatch({ REGISTER_FAIL });
+    dispatch({ type: REGISTER_FAIL });
   }
 };
 
