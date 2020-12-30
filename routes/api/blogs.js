@@ -26,9 +26,9 @@ router.post("/blogs", auth, async (req, res) => {
 router.get("/blogs", auth, async (req, res) => {
   let category = [],
     sort = {},
-    limit = parseInt(req.query.limit),
-    skip = parseInt(req.query.skip),
-    page = parseInt(req.query.page);
+    limit = req.query.limit ? parseInt(req.query.limit) : 5,
+    skip = req.query.skip ? parseInt(req.query.skip) : 0,
+    page = req.query.page ? parseInt(req.query.page) : 1;
 
   if (req.query.category) {
     // console.log(match);
