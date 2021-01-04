@@ -27,7 +27,7 @@ const Dashboard = () => {
       </Grid>
       <Grid item>
         {/* <Grid container item> */}
-        <Blogs displayTrending='false' />
+        <Blogs displayTrending='true' />
         {/* </Grid> */}
       </Grid>
     </Grid>
