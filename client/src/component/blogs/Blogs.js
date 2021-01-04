@@ -4,7 +4,8 @@ import {
   makeStyles,
   Typography,
   Button,
-  useMediaQuery
+  useMediaQuery,
+  Hidden
 } from "@material-ui/core";
 import BlogItem from "./BlogItem";
 import TrendingBlogs from "../trending/TrendingBlogs";
@@ -14,6 +15,7 @@ import { useTheme } from "@material-ui/styles";
 import { getBlogs } from "../../redux/actions/blog";
 import Footer from "../layout/Footer";
 import { Skeleton } from "@material-ui/lab";
+import PageNavigation from "../layout/PageNavigation";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,11 +25,17 @@ const useStyles = makeStyles((theme) => ({
       justifyContent: "center"
     }
   },
+  pageNavigation: {
+    backgroundColor: '#666',
+    maxWidth: "100%"
+  },
   blogs: {
-    padding: 10,
-    marginRight: 10,
-    [theme.breakpoints.down("xs")]: {
-      margin: 0
+    // padding: 10,
+    // marginRight: 10,
+    [theme.breakpoints.down("md")]: {
+      // margin: 0
+      justifyContent: "center"
+
     }
   },
   blogsTitle: {
@@ -61,7 +69,15 @@ const Blogs = ({ displayTrending }) => {
     dispatch(getBlogs());
   }, []);
   return (
-    <Grid container className={classes.root} justify='flex-end'>
+    <Grid container className={classes.root} justify='center'>
+      {/* <Hidden only={['xs', 'sm']}> */}
+      {/* Dispalys navigation to the left */}
+      {/* <Grid item xs={0} sm={3} className={classes.pageNavigation}> */}
+      <PageNavigation />
+      {/* </Grid> */}
+      {/* </Hidden> */}
+
+      {/* Displays blogs in th middle of the page */}
       <Grid
         item
         xs={12}
@@ -85,32 +101,37 @@ const Blogs = ({ displayTrending }) => {
               </Grid>
             </Fragment>
           ) : (
-            <Skeleton variant='rect' width='100%'>
-              <div />
-            </Skeleton>
-          )}
+              <Skeleton variant='rect' width='100%'>
+                <div />
+              </Skeleton>
+            )}
         </Grid>
       </Grid>
+
+      {/* Displays trending blogs to the right */}
       {displayTrending !== "false" ? (
-        <Grid item xs={3} className={classes.trendings}>
-          <Grid container item>
-            <Grid item>
-              <Typography
-                variant='h4'
-                align='center'
-                className={classes.trendingTitle}>
-                Trending
+        <Hidden only={['xs', 'sm']}>
+          <Grid item xs={0} sm={2} className={classes.trendings}>
+            <Grid container item>
+              <Grid item>
+                <Typography
+                  variant='h4'
+                  align='center'
+                  className={classes.trendingTitle}>
+                  Trending
               </Typography>
-              {!loading && trending.length !== 0 ? (
-                <TrendingBlogs className={classes.trending} />
-              ) : (
-                <Typography variant='h4'>No Trending Blogs</Typography>
-              )}
+                {!loading && trending.length !== 0 ? (
+                  <TrendingBlogs className={classes.trending} />
+                ) : (
+                    <Typography variant='h4'>No Trending Blogs</Typography>
+                  )}
+              </Grid>
             </Grid>
           </Grid>
-        </Grid>
+        </Hidden>
       ) : null}
     </Grid>
+
   );
 };
 
