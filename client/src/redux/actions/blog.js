@@ -10,7 +10,9 @@ import {
 // Get all Blog Posts
 export const getBlogs = () => async (dispatch) => {
   try {
+    console.log(1)
     const res = await axios.get("/api/blogs");
+    console.log(2, res)
     dispatch({ type: GET_BLOGS, payload: res.data });
   } catch (err) {
     dispatch({ type: BLOG_ERROR });
