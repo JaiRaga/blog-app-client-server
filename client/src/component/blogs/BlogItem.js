@@ -17,13 +17,16 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     padding: "20px 0"
+  },
+  tags: {
+    padding: "20px 0"
   }
 }));
 
 const BlogItem = ({ blog, trending }) => {
   const classes = useStyles();
-  const mediumScreenTitle = trending ? 12 : 4;
-  const mediumScreenTags = trending ? 12 : 8;
+  const mediumScreenTitle = trending ? 12 : 8;
+  const mediumScreenTags = trending ? 12 : 4;
 
   return (
     <Fragment>
@@ -33,7 +36,7 @@ const BlogItem = ({ blog, trending }) => {
             {blog.title}
           </Typography>
         </Grid>
-        <Grid item xs={12} md={mediumScreenTags}>
+        <Grid item xs={12} md={mediumScreenTags} className={classes.tags}>
           <Grid container item justify='center'>
             {blog.category.map((tag) => (
               <Button key={uuidv4()} variant='contained' color='primary'>
