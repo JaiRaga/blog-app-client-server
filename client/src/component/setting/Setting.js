@@ -88,7 +88,7 @@ const Setting = () => {
         xs={10}
         md={8}>
         <Grid item className={classes.backButton}>
-          <GoBack fullWidth />
+          <GoBack fullWidth shade="secondary" />
         </Grid>
         <form>
           <Grid container item direction='column' justify='center'>
