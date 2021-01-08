@@ -5,7 +5,8 @@ import {
   Typography,
   Button,
   useMediaQuery,
-  Hidden
+  Hidden,
+  CircularProgress
 } from "@material-ui/core";
 import BlogItem from "./BlogItem";
 import TrendingBlogs from "../trending/TrendingBlogs";
@@ -53,6 +54,9 @@ const useStyles = makeStyles((theme) => ({
   },
   divider: {
     margin: 5
+  },
+  loading: {
+    marginTop: 20
   }
 }));
 
@@ -68,14 +72,10 @@ const Blogs = ({ displayTrending }) => {
   useEffect(() => {
     dispatch(getBlogs());
   }, []);
+  console.log("**********************", displayTrending)
   return (
     <Grid container className={classes.root} justify='center'>
-      {/* <Hidden only={['xs', 'sm']}> */}
-      {/* Dispalys navigation to the left */}
-      {/* <Grid item xs={0} sm={3} className={classes.pageNavigation}> */}
       <PageNavigation />
-      {/* </Grid> */}
-      {/* </Hidden> */}
 
       {/* Displays blogs in th middle of the page */}
       <Grid
@@ -88,29 +88,32 @@ const Blogs = ({ displayTrending }) => {
           item
           direction='column'
           justify='center'
-          alignItems='center'>
-          {!loading && blogs.length !== 0 ? (
-            <Fragment>
-              <Typography variant='h4' className={classes.blogsTitle}>
-                Blogs
+          alignItems="center"
+        >
+          {loading ? (
+            <Grid container item justify="center" alignItems="center" className={classes.loading}>
+              <CircularProgress />
+            </Grid>
+          ) :
+            (
+              <Fragment>
+                <Typography variant='h4' className={classes.blogsTitle}>
+                  Blogs
               </Typography>
-              <Grid item>
-                {blogs.map((blog) => (
-                  <BlogItem key={blog._id} blog={blog} />
-                ))}
-              </Grid>
-            </Fragment>
-          ) : (
-              <Skeleton variant='rect' width='100%'>
-                <div />
-              </Skeleton>
+                <Grid item>
+                  {blogs.map((blog) => (
+                    <BlogItem key={blog._id} blog={blog} />
+                  ))}
+                </Grid>
+              </Fragment>
             )}
+
         </Grid>
       </Grid>
 
       {/* Displays trending blogs to the right */}
       {displayTrending !== "false" ? (
-        <Hidden only={['xs', 'sm']}>
+        <Hidden only={['xs', 'sm', 'md']}>
           <Grid item xs={0} sm={2} className={classes.trendings}>
             <Grid container item>
               <Grid item>
