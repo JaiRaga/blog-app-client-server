@@ -23,12 +23,10 @@ const Dashboard = () => {
   return (
     <Grid container direction='column' alignItems='center'>
       <Grid item xs={6} className={classes.btn}>
-        <CreateBlogBtn />
+        {/* <CreateBlogBtn /> */}
       </Grid>
       <Grid item>
-        {/* <Grid container item> */}
         <Blogs displayTrending='true' />
-        {/* </Grid> */}
       </Grid>
     </Grid>
   );
