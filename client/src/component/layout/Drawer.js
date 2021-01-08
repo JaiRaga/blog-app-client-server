@@ -6,8 +6,10 @@ import {
   InputBase,
   Button,
   Tooltip,
-  Zoom
+  Zoom,
+  TextField
 } from "@material-ui/core";
+import Autocomplete from "@material-ui/lab/Autocomplete";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import IconButton from "@material-ui/core/IconButton";
@@ -50,6 +52,7 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   grid: {
+    paddingTop: 7,
     paddingBottom: 3,
     paddingLeft: 10,
     fontStyle: "italic",
@@ -80,6 +83,10 @@ const useStyles = makeStyles((theme) => ({
   title: {
     fontWeight: "800",
     padding: "5px 16px"
+  },
+  autocomplete: {
+    marginLeft: 10,
+    color: "#fff"
   }
 }));
 
@@ -262,7 +269,22 @@ export default function SwipeableTemporaryDrawer() {
       {isAuthenticated ? authLinks : guestLinks}
     </div>
   );
+
+  const top100Films = [
+    { title: "Sarvamum Krishana Arpanam", year: 5464 },
+    { title: "The Shawshank Redemption", year: 1994 },
+    { title: "The Godfather", year: 1972 },
+    { title: "The Godfather: Part II", year: 1974 },
+    { title: "The Dark Knight", year: 2008 },
+    { title: "12 Angry Men", year: 1957 },
+    { title: "Schindler's List", year: 1993 },
+    { title: "Pulp Fiction", year: 1994 },
+    { title: "The Lord of the Rings: The Return of the King", year: 2003 },
+    { title: "The Good, the Bad and the Ugly", year: 1966 }
+  ];
+
   const anchor = "bottom";
+
   return (
     <div className={classes.root}>
       <AppBar position='static' className={classes.display}>
@@ -272,9 +294,20 @@ export default function SwipeableTemporaryDrawer() {
             onClick={toggleDrawer(anchor, true)}>
             <DehazeIcon />
           </IconButton>
-          <Typography className={classes.grid} variant='h6'>
+          {/* <Typography className={classes.grid} variant='h6'>
             Pom
-          </Typography>
+          </Typography> */}
+          <Autocomplete
+            id='search-box'
+            options={top100Films}
+            className={classes.autocomplete}
+            // size="small"
+            getOptionLabel={(option) => option.title}
+            style={{ width: 300 }}
+            renderInput={(params) => (
+              <TextField {...params} label='Search Pom' variant='filled' />
+            )}
+          />
           <SwipeableDrawer
             anchor={anchor}
             open={state[anchor]}
