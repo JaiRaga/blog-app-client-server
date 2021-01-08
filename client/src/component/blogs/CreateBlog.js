@@ -6,7 +6,7 @@ import {
   Typography,
   Button
 } from "@material-ui/core";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { postBlog } from "../../redux/actions/blog";
 
@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
 const CreateBlog = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const history = useHistory()
 
   const [blog, setBlog] = useState({ title: "", body: "" });
   // console.log(blog);
@@ -33,6 +34,7 @@ const CreateBlog = () => {
     e.preventDefault();
     console.log(blog);
     dispatch(postBlog(blog));
+    history.goBack()
   };
 
   return (
