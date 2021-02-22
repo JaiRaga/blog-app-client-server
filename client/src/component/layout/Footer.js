@@ -17,13 +17,17 @@ const useStyles = makeStyles((theme) => ({
 const Footer = () => {
   const classes = useStyles();
   return (
-    <BottomNavigation showLabels value={0} className={classes.root}>
-      <BottomNavigationAction
-        showLabel
-        label='Made By Raga Jai Santhosh'
-        color='primary'
-      />
-    </BottomNavigation>
+    <Grid container direction="column" justify="flex-end">
+      <Grid item>
+        <BottomNavigation showLabels value={0} className={classes.root}>
+          <BottomNavigationAction
+            showLabel
+            label='Made By Raga Jai Santhosh'
+            color='primary'
+          />
+        </BottomNavigation>
+      </Grid>
+    </Grid>
   );
 };
 
