@@ -31,7 +31,7 @@ const Dashboard = () => {
 	return (
 		<Grid container justify='center' className={classes.root}>
 			<PageNavigation />
-			<Grid item xs={12} sm={6} lg={8}>
+			<Grid item xs={6} sm={6} lg={8}>
 				<Grid container item direction='column' alignItems='center'>
 					<Grid item xs={6} className={classes.btn}>
 						{/* <CreateBlogBtn /> */}
