@@ -15,7 +15,7 @@ import ProfileContainer from './component/profile/ProfileContainer'
 import Search from './component/search/Search'
 import Setting from './component/setting/Setting'
 import CreateBlog from './component/blogs/CreateBlog'
-import Tags from './component/tag/Tags'
+import TagContainer from './component/tag/TagContainer'
 
 // Redux
 import store from './redux/store'
@@ -50,7 +50,7 @@ function App() {
 					<PrivateRoute exact path='/blog/:id' component={Blog} />
 					<PrivateRoute exact path='/blogs' component={Blogs} />
 					<PrivateRoute exact path='/profile' component={ProfileContainer} />
-					<PrivateRoute exact path='/tags' component={Tags} />
+					<PrivateRoute exact path='/tags' component={TagContainer} />
 					<PrivateRoute exact path='/setting' component={Setting} />
 
 					{/* <Route exact path='/trending' component={TrendingBlogs} /> */}
