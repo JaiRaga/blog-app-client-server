@@ -31,8 +31,18 @@ const theme = createMuiTheme({
 				color: '#fff',
 			},
 		},
+		MuiInputLabel: {
+			shrink: {
+				color: '#fff',
+			},
+		},
 		MuiAutocomplete: {
 			inputFocused: {
+				color: '#fff',
+			},
+		},
+		MuiOutlinedInput: {
+			input: {
 				color: '#fff',
 			},
 		},
