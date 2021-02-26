@@ -1,112 +1,159 @@
-import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import {
-  makeStyles,
-  Grid,
-  TextField,
-  Button,
-  Typography
-} from "@material-ui/core";
-import { Link, Redirect } from "react-router-dom";
-import { login } from "../../redux/actions/auth";
+	makeStyles,
+	Grid,
+	TextField,
+	Button,
+	Typography,
+	Paper,
+} from '@material-ui/core'
+import { Link, Redirect } from 'react-router-dom'
+import { login } from '../../redux/actions/auth'
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    "& > *": {
-      margin: theme.spacing(1),
-      width: "25ch"
-    }
-  },
-  loginContainer: {
-    marginTop: "20px"
-  }
-}));
+	root: {
+		'& > *': {
+			margin: theme.spacing(1),
+			width: '25ch',
+		},
+	},
+	loginContainer: {
+		marginTop: '20px',
+	},
+	typography: {
+		color: '#fff',
+	},
+	textfieldColor: {
+		backgroundColor: '#111d5e',
+		color: '#000',
+	},
+	parentGrid: {
+		marginTop: 10,
+	},
+	paper: {
+		padding: '20px 0',
+		backgroundColor: '#111d5e99',
+	},
+	link: {
+		color: '#0a043c',
+		fontFamily: 'monospace',
+		fontSize: 19,
+		display: 'block',
+	},
+	footer: {
+		marginTop: '20px',
+		color: '#fff',
+	},
+}))
 
 const Login = () => {
-  const classes = useStyles();
+	const classes = useStyles()
 
-  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  const dispatch = useDispatch();
+	const isAuthenticated = useSelector((state) => state.auth.isAuthenticated)
+	const dispatch = useDispatch()
 
-  const [loginState, setLoginState] = useState({
-    email: "",
-    password: ""
-  });
+	const [loginState, setLoginState] = useState({
+		email: '',
+		password: '',
+	})
 
-  const { email, password } = loginState;
+	const { email, password } = loginState
 
-  const onChange = (e) => {
-    setLoginState({ ...loginState, [e.target.name]: e.target.value });
-  };
+	const onChange = (e) => {
+		setLoginState({ ...loginState, [e.target.name]: e.target.value })
+	}
 
-  const onSubmit = (e) => {
-    e.preventDefault();
+	const onSubmit = (e) => {
+		e.preventDefault()
 
-    dispatch(login(email, password));
-  };
+		dispatch(login(email, password))
+	}
 
-  if (isAuthenticated) {
-    return <Redirect to='/blogs' />;
-  }
+	if (isAuthenticated) {
+		return <Redirect to='/blogs' />
+	}
 
-  return (
-    <Grid container justify='center' alignItems='center'>
-      <Grid
-        className={classes.loginContainer}
-        container
-        item
-        xs={6}
-        direction='column'
-        justify='center'
-        alignItems='center'>
-        <Grid item>
-          <Typography variant='h5'>Login</Typography>
-        </Grid>
-        <Grid
-          container
-          item
-          display='column'
-          justify='center'
-          alignItems='center'>
-          <form className={classes.root} onSubmit={onSubmit}>
-            <Grid item>
-              <TextField
-                id='email'
-                name='email'
-                label='email'
-                variant='outlined'
-                onChange={onChange}
-              />
-            </Grid>
-            <Grid item>
-              <TextField
-                id='password'
-                name='password'
-                label='password'
-                variant='outlined'
-                type='password'
-                onChange={onChange}
-              />
-            </Grid>
-          </form>
-        </Grid>
-        <Grid item>
-          <Button
-            type='submit'
-            color='primary'
-            variant='contained'
-            onClick={onSubmit}>
-            Let's Get Started
-          </Button>
-        </Grid>
-        <Grid item>
-          <Typography variant='subtitle2' className={classes.loginContainer}>
-            Don't have an account? <Link to='/register'>Sign Up</Link>
-          </Typography>
-        </Grid>
-      </Grid>
-    </Grid>
-  );
-};
+	return (
+		<Grid container justify='center' className={classes.outerContainer}>
+			<Grid item xs={10} md={6} className={classes.parentGrid}>
+				<Paper elevation={10} className={classes.paper}>
+					<Grid container item justify='center' alignItems='center'>
+						<Grid
+							className={classes.loginContainer}
+							container
+							item
+							xs={6}
+							direction='column'
+							justify='center'
+							alignItems='center'>
+							<Grid item>
+								<Typography variant='h5' className={classes.typography}>
+									Login
+								</Typography>
+							</Grid>
+							<Grid
+								container
+								item
+								display='column'
+								justify='center'
+								alignItems='center'>
+								<form className={classes.root} onSubmit={onSubmit}>
+									<Grid item>
+										<TextField
+											id='email'
+											name='email'
+											label='email'
+											variant='outlined'
+											onChange={onChange}
+											focused={false}
+											classes={{
+												root: classes.textfieldColor,
+											}}
+										/>
+									</Grid>
+									<Grid item>
+										<TextField
+											id='password'
+											name='password'
+											label='password'
+											variant='outlined'
+											type='password'
+											onChange={onChange}
+											focused={false}
+											classes={{
+												root: classes.textfieldColor,
+											}}
+										/>
+									</Grid>
+								</form>
+							</Grid>
+							<Grid item>
+								<Button
+									type='submit'
+									color='primary'
+									variant='contained'
+									onClick={onSubmit}>
+									Let's Get Started
+								</Button>
+							</Grid>
+							<Grid item>
+								<Typography
+									variant='subtitle2'
+									align='center'
+									className={classes.footer}>
+									Don't have an account?
+									<Link to='/register'>
+										<span className={classes.link}> Sign Up</span>
+									</Link>
+								</Typography>
+							</Grid>
+						</Grid>
+					</Grid>
+				</Paper>
+			</Grid>
+		</Grid>
+	)
+}
 
-export default Login;
+export default Login
