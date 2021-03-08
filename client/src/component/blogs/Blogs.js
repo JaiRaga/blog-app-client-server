@@ -78,6 +78,7 @@ const Blogs = ({ displayTrending }) => {
 
 	return (
 		<Grid container className={classes.root} justify='center'>
+			{/* <PageNavigation /> */}
 			{/* Displays blogs in th middle of the page */}
 			<Grid
 				item
