@@ -64,6 +64,7 @@ const Tags = () => {
 		<div>
 			<Grid container item justify='center'>
 				<TagSearch tags={random} films={top100Films} />
+
 				<Grid item className={classes.btncontiner}>
 					<Button variant='contained' color='primary' className={classes.btn}>
 						Search Tags
