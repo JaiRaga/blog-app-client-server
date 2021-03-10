@@ -46,6 +46,11 @@ const theme = createMuiTheme({
 				color: '#fff',
 			},
 		},
+		MuiAutocomplete: {
+			inputFocused: {
+				color: '#000',
+			},
+		},
 	},
 })
 
