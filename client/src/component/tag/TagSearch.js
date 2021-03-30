@@ -28,17 +28,20 @@ const TagSearch = ({ tags, films }) => {
 			options={topTags}
 			disableCloseOnSelect
 			getOptionLabel={(option) => option.title}
-			renderOption={(option, { selected }) => (
-				<React.Fragment>
-					<Checkbox
-						icon={icon}
-						checkedIcon={checkedIcon}
-						style={{ marginRight: 8 }}
-						checked={selected}
-					/>
-					{option.title}
-				</React.Fragment>
-			)}
+			renderOption={(option, { selected }) => {
+				// console.log(option, selected)
+				return (
+					<React.Fragment>
+						<Checkbox
+							icon={icon}
+							checkedIcon={checkedIcon}
+							style={{ marginRight: 8 }}
+							checked={selected}
+						/>
+						{option.title}
+					</React.Fragment>
+				)
+			}}
 			style={{ width: 500 }}
 			renderInput={(params) => (
 				<TextField
