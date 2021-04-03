@@ -33,6 +33,7 @@ router.get('/blogs', async (req, res) => {
 		page = req.query.page ? parseInt(req.query.page) : 1
 
 	console.log('Category', category)
+	console.log('query', req.query)
 	if (req.query.category) {
 		// console.log(match);
 		category = req.query.category.toLowerCase().split(',')
@@ -56,7 +57,7 @@ router.get('/blogs', async (req, res) => {
 
 		console.log(2)
 		console.log('Blogs', blogs)
-		if (!blogs) return res.status(404).send('No blogs found!')
+		if (!blogs.length) return res.send(['No Blogs Found!'])
 		res.send(blogs)
 	} catch (err) {
 		res.status(500).send('Server Error')
