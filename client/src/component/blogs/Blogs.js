@@ -64,18 +64,22 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const Blogs = ({ displayTrending }) => {
+	const history = useHistory()
+
 	useEffect(() => {
-		dispatch(getBlogs())
+		console.log('Query params', history.location.search)
+		dispatch(getBlogs(history.location.search))
 	}, [])
 
 	const classes = useStyles()
 	const dispatch = useDispatch()
-	const history = useHistory()
+
 	const theme = useTheme()
 	const trendingSidebar = useMediaQuery(theme.breakpoints.down('xs'))
 	const blog = useSelector((state) => state.blog)
-	const { blogs, loading, trending } = blog
+	const { blogs, loading, trending, notFound } = blog
 
+	console.log(history)
 	return (
 		<Grid container className={classes.root} justify='center'>
 			{/* <PageNavigation /> */}
@@ -91,7 +95,7 @@ const Blogs = ({ displayTrending }) => {
 					direction='column'
 					justify='center'
 					alignItems='center'>
-					{loading ? (
+					{(loading || blogs.length) && !notFound === 0 ? (
 						<Grid
 							container
 							item
@@ -106,7 +110,7 @@ const Blogs = ({ displayTrending }) => {
 								variant='h4'
 								align='center'
 								className={classes.blogsTitle}>
-								Blogs
+								{notFound ? 'No Blogs Found!' : 'Blogs'}
 							</Typography>
 
 							<Grid item>
@@ -122,7 +126,7 @@ const Blogs = ({ displayTrending }) => {
 			{/* Displays trending blogs to the right */}
 			{displayTrending !== 'false' ? (
 				<Hidden only={['xs', 'sm', 'md']}>
-					<Grid item xs={0} sm={2} md={4} className={classes.trendings}>
+					<Grid item sm={2} md={4} className={classes.trendings}>
 						<Grid container item>
 							<Grid item>
 								<Typography
