@@ -34,10 +34,7 @@ const PageNavigation = () => {
 	return (
 		<Hidden only={['xs', 'sm']}>
 			<Grid item className={classes.root}>
-				<List
-					component='nav'
-					aria-label='side-navigation'
-					classNAme={classes.list}>
+				<List component='nav' aria-label='side-navigation'>
 					<ListItem
 						button
 						onClick={() => history.push('/dashboard')}
