@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }))
 
-const TagSearch = ({ tags, films }) => {
+const TagSearch = ({ tags }) => {
 	const classes = useStyles()
 	const topTags = [...tags]
 
