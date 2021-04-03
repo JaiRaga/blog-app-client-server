@@ -15,6 +15,7 @@ import Comments from '../comments/Comments'
 import Footer from '../layout/Footer'
 import { useHistory, useLocation } from 'react-router-dom'
 import { getBlogs } from '../../redux/actions/blog'
+// import { loadUser } from '../../redux/actions/auth'
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -54,7 +55,8 @@ const Blog = (prop) => {
 	const dispatch = useDispatch()
 
 	useEffect(() => {
-		dispatch(getBlogs())
+		// dispatch(loadUser())
+		// dispatch(getBlogs())
 	}, [])
 
 	const classes = useStyles()
@@ -111,10 +113,12 @@ const Blog = (prop) => {
 			</Grid>
 			<Divider className={classes.divider} />
 			<Grid item className={classes.comments}>
-				<Typography variant='h3' className={classes.commentTitle}>
-					Comments
-				</Typography>
-				<Comments />
+				<Grid container item direction='column' justify='flex-end'>
+					<Typography variant='h3' className={classes.commentTitle}>
+						Comments
+					</Typography>
+					<Comments />
+				</Grid>
 			</Grid>
 			{/* <Grid item className={classes.footer}>
         <Footer />
