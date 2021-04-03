@@ -1,50 +1,52 @@
-import axios from "axios";
+import axios from 'axios'
 import {
-  GET_BLOGS,
-  UPDATE_TRENDING,
-  TRENDING_ERROR,
-  BLOG_ERROR,
-  POST_BLOG
-} from "./types";
+	GET_BLOGS,
+	UPDATE_TRENDING,
+	TRENDING_ERROR,
+	BLOG_ERROR,
+	POST_BLOG,
+	BLOGS_NOT_FOUND,
+} from './types'
 
 // Get all Blog Posts
-export const getBlogs = () => async (dispatch) => {
-  try {
-    console.log(1)
-    const res = await axios.get("/api/blogs");
-    console.log(2, res)
-    dispatch({ type: GET_BLOGS, payload: res.data });
-  } catch (err) {
-    dispatch({ type: BLOG_ERROR });
-  }
-};
+export const getBlogs = (query) => async (dispatch) => {
+	try {
+		console.log(1)
+		const res = await axios.get(`/api/blogs${query}`)
+		console.log(2, res)
+		if (res.data[0] === 'No Blogs Found!') dispatch({ type: BLOGS_NOT_FOUND })
+		else dispatch({ type: GET_BLOGS, payload: res.data })
+	} catch (err) {
+		dispatch({ type: BLOG_ERROR })
+	}
+}
 
 // Post Blog
 export const postBlog = (blog) => async (dispatch) => {
-  const config = {
-    headers: {
-      "Content-Type": "application/json"
-    }
-  };
+	const config = {
+		headers: {
+			'Content-Type': 'application/json',
+		},
+	}
 
-  const data = JSON.stringify(blog);
-  // console.log(data);
+	const data = JSON.stringify(blog)
+	// console.log(data);
 
-  try {
-    console.log(1)
-    const res = await axios.post("/api/blogs", data, config);
-    console.log("Blogs POST", res.data);
-    dispatch({ type: POST_BLOG, payload: res.data });
-  } catch (err) {
-    dispatch({ type: BLOG_ERROR });
-  }
-};
+	try {
+		console.log(1)
+		const res = await axios.post('/api/blogs', data, config)
+		console.log('Blogs POST', res.data)
+		dispatch({ type: POST_BLOG, payload: res.data })
+	} catch (err) {
+		dispatch({ type: BLOG_ERROR })
+	}
+}
 
 // Toggle trending sidebar
 export const toggleTrending = (open) => async (dispatch) => {
-  try {
-    dispatch({ type: UPDATE_TRENDING, payload: open });
-  } catch (err) {
-    dispatch({ type: TRENDING_ERROR });
-  }
-};
+	try {
+		dispatch({ type: UPDATE_TRENDING, payload: open })
+	} catch (err) {
+		dispatch({ type: TRENDING_ERROR })
+	}
+}
