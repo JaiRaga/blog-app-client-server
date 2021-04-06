@@ -4,10 +4,10 @@ import TagItem from './TagItem'
 import TagSearch from './TagSearch'
 
 const useStyles = makeStyles((theme) => ({
-	btncontiner: {
-		display: 'flex',
-		alignItems: 'center',
-	},
+	// btncontiner: {
+	// 	display: 'flex',
+	// 	alignItems: 'center',
+	// },
 }))
 
 const Tags = () => {
@@ -33,12 +33,6 @@ const Tags = () => {
 		<div>
 			<Grid container item justify='center'>
 				<TagSearch tags={random} />
-
-				<Grid item className={classes.btncontiner}>
-					<Button variant='contained' color='primary' className={classes.btn}>
-						Search Tags
-					</Button>
-				</Grid>
 
 				{random.map((tag) => (
 					<TagItem name={tag.title} />
