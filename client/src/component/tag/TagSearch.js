@@ -1,10 +1,12 @@
-import React from 'react'
-import { makeStyles, Grid } from '@material-ui/core'
+import React, { useState } from 'react'
+import { makeStyles, Grid, Button } from '@material-ui/core'
+import { useHistory } from 'react-router-dom'
 import Checkbox from '@material-ui/core/Checkbox'
 import TextField from '@material-ui/core/TextField'
 import Autocomplete from '@material-ui/lab/Autocomplete'
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank'
 import CheckBoxIcon from '@material-ui/icons/CheckBox'
+import { Fragment } from 'react'
 
 const icon = <CheckBoxOutlineBlankIcon fontSize='small' />
 const checkedIcon = <CheckBoxIcon fontSize='small' />
@@ -14,44 +16,70 @@ const useStyles = makeStyles((theme) => ({
 		margin: '10px 5px',
 		// marginRight: 10,
 	},
+	btncontiner: {
+		display: 'flex',
+		alignItems: 'center',
+	},
 }))
 
 const TagSearch = ({ tags }) => {
 	const classes = useStyles()
+	const history = useHistory()
+	const [search, setSearch] = useState([])
 	const topTags = [...tags]
 
+	const handleClick = () => {
+		console.log(search)
+		let query = search.map((item) => item.title).join(',')
+		console.log('Query', query)
+		history.push(`/blogs?category=${query}`)
+	}
+
 	return (
-		<Autocomplete
-			className={classes.root}
-			multiple
-			id='checkboxes-tags-demo'
-			options={topTags}
-			disableCloseOnSelect
-			getOptionLabel={(option) => option.title}
-			renderOption={(option, { selected }) => {
-				// console.log(option, selected)
-				return (
-					<React.Fragment>
-						<Checkbox
-							icon={icon}
-							checkedIcon={checkedIcon}
-							style={{ marginRight: 8 }}
-							checked={selected}
-						/>
-						{option.title}
-					</React.Fragment>
-				)
-			}}
-			style={{ width: 500 }}
-			renderInput={(params) => (
-				<TextField
-					{...params}
-					variant='outlined'
-					label='Checkboxes'
-					placeholder='Favorites'
-				/>
-			)}
-		/>
+		<Fragment>
+			<Autocomplete
+				className={classes.root}
+				multiple
+				onChange={(event, value) => setSearch([...value])}
+				id='checkboxes-tags-demo'
+				options={topTags}
+				disableCloseOnSelect
+				getOptionLabel={(option) => option.title}
+				getOptionSelected={(option, value) => option.title === value.title}
+				renderOption={(option, { selected }) => {
+					// console.log(option, selected)
+					return (
+						<React.Fragment>
+							<Checkbox
+								icon={icon}
+								checkedIcon={checkedIcon}
+								style={{ marginRight: 8 }}
+								checked={selected}
+							/>
+							{option.title}
+						</React.Fragment>
+					)
+				}}
+				style={{ width: 500 }}
+				renderInput={(params) => (
+					<TextField
+						{...params}
+						variant='outlined'
+						label='Search Multiple Tags'
+						placeholder='Favorites'
+					/>
+				)}
+			/>
+			<Grid item className={classes.btncontiner}>
+				<Button
+					variant='contained'
+					color='primary'
+					className={classes.btn}
+					onClick={handleClick}>
+					Search Tags
+				</Button>
+			</Grid>
+		</Fragment>
 	)
 }
 
