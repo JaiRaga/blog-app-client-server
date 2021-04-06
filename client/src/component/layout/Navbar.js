@@ -2,7 +2,6 @@ import React, { Fragment } from 'react'
 import {
 	fade,
 	makeStyles,
-	TextField,
 	AppBar,
 	Toolbar,
 	InputBase,
@@ -15,7 +14,7 @@ import {
 	ListItemIcon,
 	ListItemText,
 } from '@material-ui/core'
-import Autocomplete from '@material-ui/lab/Autocomplete'
+
 import ChangeHistoryIcon from '@material-ui/icons/ChangeHistory'
 import PersonAddIcon from '@material-ui/icons/PersonAdd'
 import PersonIcon from '@material-ui/icons/Person'
@@ -27,6 +26,7 @@ import SearchIcon from '@material-ui/icons/Search'
 import { Link, Redirect } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { logout } from '../../redux/actions/auth'
+import Search from './Search'
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -61,19 +61,6 @@ const useStyles = makeStyles((theme) => ({
 	},
 }))
 
-const top100Films = [
-	{ title: 'Sarvamum Krishana Arpanam', year: 5464 },
-	{ title: 'The Shawshank Redemption', year: 1994 },
-	{ title: 'The Godfather', year: 1972 },
-	{ title: 'The Godfather: Part II', year: 1974 },
-	{ title: 'The Dark Knight', year: 2008 },
-	{ title: '12 Angry Men', year: 1957 },
-	{ title: "Schindler's List", year: 1993 },
-	{ title: 'Pulp Fiction', year: 1994 },
-	{ title: 'The Lord of the Rings: The Return of the King', year: 2003 },
-	{ title: 'The Good, the Bad and the Ugly', year: 1966 },
-]
-
 const Navbar = (props) => {
 	const classes = useStyles()
 	const { isAuthenticated, loading } = useSelector((state) => state.auth)
@@ -91,17 +78,7 @@ const Navbar = (props) => {
 					</ListItem>
 				</Link>
 			</List>
-			<List className={classes.right}>
-				<Autocomplete
-					id='search-box'
-					options={top100Films}
-					getOptionLabel={(option) => option.title}
-					style={{ width: 300 }}
-					renderInput={(params) => (
-						<TextField {...params} label='Search Pom' variant='filled' />
-					)}
-				/>
-			</List>
+			<List className={classes.right}>{/* <Search /> */}</List>
 			<List className={classes.right}>
 				<Link to='/dashboard' className={classes.link}>
 					<ListItem button>
