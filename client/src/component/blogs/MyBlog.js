@@ -66,10 +66,16 @@ const MyBlog = (prop) => {
 	const classes = useStyles()
 	// const history = useHistory()
 	// const location = useLocation()
-	const blogs = useSelector((state) => state.blog.currentUserBlogs)
+	let blogs = useSelector((state) => state.blog.currentUserBlogs)
+
+	if (blogs.length === 0) {
+		blogs = JSON.parse(localStorage.getItem('authUserBlogs'))
+	}
+
 	let blog = blogs.filter((blog) => blog._id === prop.match.params.id)
 	// console.log(prop.match.params.id, blog)
 	blog = blog[0]
+
 	console.log('my blog', blog)
 
 	return (
