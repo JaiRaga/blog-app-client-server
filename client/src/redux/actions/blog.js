@@ -1,6 +1,7 @@
 import axios from 'axios'
 import {
 	GET_BLOGS,
+	GET_MY_BLOGS,
 	UPDATE_TRENDING,
 	TRENDING_ERROR,
 	BLOG_ERROR,
@@ -11,9 +12,9 @@ import {
 // Get all Blog Posts
 export const getBlogs = (query) => async (dispatch) => {
 	try {
-		console.log(1)
+		// console.log(1)
 		const res = await axios.get(`/api/blogs${query}`)
-		console.log(2, res)
+		// console.log(2, res)
 		if (res.data[0] === 'No Blogs Found!') dispatch({ type: BLOGS_NOT_FOUND })
 		else dispatch({ type: GET_BLOGS, payload: res.data })
 	} catch (err) {
@@ -33,9 +34,9 @@ export const postBlog = (blog) => async (dispatch) => {
 	// console.log(data);
 
 	try {
-		console.log(1)
+		// console.log(1)
 		const res = await axios.post('/api/blogs', data, config)
-		console.log('Blogs POST', res.data)
+		// console.log('Blogs POST', res.data)
 		dispatch({ type: POST_BLOG, payload: res.data })
 	} catch (err) {
 		dispatch({ type: BLOG_ERROR })
@@ -48,5 +49,15 @@ export const toggleTrending = (open) => async (dispatch) => {
 		dispatch({ type: UPDATE_TRENDING, payload: open })
 	} catch (err) {
 		dispatch({ type: TRENDING_ERROR })
+	}
+}
+
+// Get blogs by me
+export const getBlogsByMe = () => async (dispatch) => {
+	try {
+		const res = await axios.get('/api/blogs/me')
+		dispatch({ type: GET_MY_BLOGS, payload: res.data })
+	} catch (err) {
+		dispatch({ type: BLOG_ERROR })
 	}
 }
