@@ -6,6 +6,7 @@ import Login from './component/auth/Login'
 import Register from './component/auth/Register'
 import Blogs from './component/blogs/Blogs'
 import Blog from './component/blogs/Blog'
+import MyBlog from './component/blogs/MyBlog'
 import Navbar from './component/layout/Navbar'
 import Drawer from './component/layout/Drawer'
 import Dashboard from './component/dashboard/Dashboard'
@@ -48,6 +49,7 @@ function App() {
 					<PrivateRoute exact path='/create' component={CreateBlog} />
 					<PrivateRoute exact path='/dashboard' component={Dashboard} />
 					<PrivateRoute exact path='/blog/:id' component={Blog} />
+					<PrivateRoute exact path='/myblog/:id' component={MyBlog} />
 					<PrivateRoute exact path='/blogs' component={Blogs} />
 					<PrivateRoute exact path='/profile' component={ProfileContainer} />
 					<PrivateRoute exact path='/tags' component={TagContainer} />
