@@ -79,6 +79,7 @@ const Blogs = ({ displayTrending }) => {
 	const blog = useSelector((state) => state.blog)
 	const { blogs, loading, trending, notFound } = blog
 
+	localStorage.setItem('getBlogs', JSON.stringify(blogs))
 	console.log(history)
 	return (
 		<Grid container className={classes.root} justify='center'>
