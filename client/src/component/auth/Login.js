@@ -33,7 +33,8 @@ const useStyles = makeStyles((theme) => ({
 	},
 	paper: {
 		padding: '20px 0',
-		backgroundColor: '#0007',
+		backgroundColor: '#34656d',
+		// backgroundColor: '#0007',
 	},
 	link: {
 		color: '#0a043c',
