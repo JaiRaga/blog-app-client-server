@@ -5,12 +5,14 @@ import {
 	BLOG_ERROR,
 	POST_BLOG,
 	BLOGS_NOT_FOUND,
+	GET_MY_BLOGS,
 } from '../actions/types'
 
 const initialState = {
 	blog: null,
 	search: [],
 	blogs: [],
+	currentUserBlogs: [],
 	trending: [],
 	openTrending: false,
 	loading: true,
@@ -33,6 +35,13 @@ export default (state = initialState, action) => {
 			return {
 				...state,
 				blogs: [payload, ...state.blogs],
+				loading: false,
+			}
+
+		case GET_MY_BLOGS:
+			return {
+				...state,
+				currentUserBlogs: [...payload],
 				loading: false,
 			}
 
