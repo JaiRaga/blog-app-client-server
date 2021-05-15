@@ -40,6 +40,8 @@ const ProfileContainer = () => {
 
 	const user = useSelector((state) => state.auth.user)
 	const blogs = useSelector((state) => state.blog.currentUserBlogs)
+	// stores user details for loading after page refresh.
+	localStorage.setItem('authUserBlogs', JSON.stringify(blogs))
 
 	return (
 		<Grid container justify='center' className={classes.root}>
