@@ -13,6 +13,13 @@ const useStyles = makeStyles((theme) => ({
 const Tags = () => {
 	const random = [
 		{ title: 'Avionics' },
+		{ title: 'Swimming' },
+		{ title: 'Sports' },
+		{ title: 'fitness' },
+		{ title: 'Books' },
+		{ title: 'Adventure' },
+		{ title: 'Food' },
+		{ title: 'travel' },
 		{ title: 'Semiconductor' },
 		{ title: 'Gaming' },
 		{ title: 'Agriculture' },
@@ -24,6 +31,10 @@ const Tags = () => {
 		{ title: 'Action' },
 		{ title: 'Horror' },
 		{ title: 'Comedy' },
+		{ title: 'Nature' },
+		{ title: 'Trekking' },
+		{ title: 'hiking' },
+		{ title: 'Entertainment' },
 		{ title: 'All' },
 	]
 
