@@ -26,20 +26,21 @@ router.post('/blogs', auth, async (req, res) => {
 
 // Get blogs from all categories
 router.get('/blogs', async (req, res) => {
+	// populates blogs per page, pagination etc.
 	let category = [],
 		sort = {},
-		limit = req.query.limit ? parseInt(req.query.limit) : 12,
+		limit = req.query.limit ? parseInt(req.query.limit) : 10,
 		skip = req.query.skip ? parseInt(req.query.skip) : 0,
 		page = req.query.page ? parseInt(req.query.page) : 1
 
-	console.log('Category', category)
-	console.log('query', req.query)
+	// transforms incoming categories into an array.
 	if (req.query.category) {
 		// console.log(match);
 		category = req.query.category.toLowerCase().split(',')
-		console.log('Category', category)
-	} else category.push('all')
+		console.log('Category 2', category)
+	}
 
+	// checks if sort query is present and defaults to descending order(newly created blogs at the top)
 	if (req.query.sortBy) {
 		const chunk = req.query.sortBy.split(':')
 		sort[chunk[0]] = chunk[1]
@@ -47,20 +48,78 @@ router.get('/blogs', async (req, res) => {
 	} else sort = { createdAt: 'desc' }
 
 	try {
-		console.log(1, 'limit: ', limit, 'skip', skip, 'sort', sort)
-		const blogs = await Blog.find({ category: { $all: category } })
-			.limit(limit)
-			.skip(page * skip)
-			.sort({
-				...sort,
-			})
+		const blogs =
+			category.length === 0
+				? await Blog.find()
+						.limit(limit)
+						.skip(page * skip)
+						.sort({
+							...sort,
+						})
+				: await Blog.find({
+						category: { $all: category },
+				  })
+						// .limit(limit)
+						.skip(page * skip)
+						.sort({
+							...sort,
+						})
 
-		console.log(2)
-		console.log('Blogs', blogs)
 		if (!blogs.length) return res.send(['No Blogs Found!'])
-		res.send(blogs)
+
+		Promise.all(
+			blogs.map(async (blog) => {
+				await blog
+					.populate('owner')
+					.populate({ path: 'comments.user' })
+					.execPopulate()
+				await blog.save()
+				return blog
+			})
+		)
+			.then((result) => res.send(result))
+			.catch((err) => console.log('err', err))
+
+		// res.send(blogs)
 	} catch (err) {
 		res.status(500).send('Server Error')
+	}
+})
+
+// find blogs by me
+router.get('/blogs/me', auth, async (req, res) => {
+	try {
+		// Get all blogs
+		await req.user
+			.populate({
+				path: 'blogs',
+				options: {
+					// limit: 4,
+					sort: { createdAt: -1 },
+				},
+			})
+			.execPopulate()
+
+		let blogs = req.user.blogs
+
+		// console.log(blogs);
+
+		Promise.all(
+			blogs.map(async (blog) => {
+				await blog.populate('owner').execPopulate()
+				await blog.save()
+				return blog
+			})
+		)
+			.then((result) => {
+				// console.log(result);
+				res.send(result)
+			})
+			.catch((err) => console.log(err))
+
+		// res.send(req.user.blogs);
+	} catch (e) {
+		res.status(500).send()
 	}
 })
 
@@ -128,6 +187,26 @@ router.delete('/blog/:id', auth, async (req, res) => {
 		res.send(blog)
 	} catch (err) {
 		res.status(500).send('Server Error')
+	}
+})
+
+// Add Comment to a blog
+router.post('/comment/:id', auth, async (req, res) => {
+	try {
+		const blog = await Blog.findById({ _id: req.params.id })
+		if (!blog) return res.status(404).send('Blog Not Found!')
+
+		const comment = {
+			text: req.body.text,
+			user: req.user._id,
+		}
+
+		blog.comments.unshift(comment)
+		await blog.populate('comments.user').execPopulate()
+		await blog.save()
+		res.send(blog.comments)
+	} catch (err) {
+		res.status(500).send('SErver Error')
 	}
 })
 
