@@ -74,6 +74,8 @@ const Blog = (prop) => {
 	// console.log(prop.match.params.id, blog)
 	blog = blog[0]
 
+	const comments = blog.comments
+
 	return (
 		<Fragment>
 			{!blog ? (
@@ -130,7 +132,7 @@ const Blog = (prop) => {
 							<Typography variant='h3' className={classes.commentTitle}>
 								Comments
 							</Typography>
-							<Comments />
+							<Comments comments={comments} />
 						</Grid>
 					</Grid>
 					{/* <Grid item className={classes.footer}>
