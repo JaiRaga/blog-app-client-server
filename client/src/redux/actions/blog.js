@@ -13,8 +13,9 @@ import {
 export const getBlogs = (query) => async (dispatch) => {
 	try {
 		// console.log(1)
+		// console.log(query)
 		const res = await axios.get(`/api/blogs${query}`)
-		// console.log(2, res)
+		// console.log(2, res.data)
 		if (res.data[0] === 'No Blogs Found!') dispatch({ type: BLOGS_NOT_FOUND })
 		else dispatch({ type: GET_BLOGS, payload: res.data })
 	} catch (err) {
