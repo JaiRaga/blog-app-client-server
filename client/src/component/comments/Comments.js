@@ -1,24 +1,26 @@
-import React from "react";
-import { Grid, Paper, makeStyles } from "@material-ui/core";
-import CommentItem from "./CommentItem";
+import React from 'react'
+import { Grid, Paper, makeStyles } from '@material-ui/core'
+import CommentItem from './CommentItem'
 
 const useStyles = makeStyles((theme) => ({
-  background: {
-    backgroundColor: theme.palette.background.default,
-    width: "100%"
-  }
-}));
+	background: {
+		backgroundColor: theme.palette.background.default,
+		width: '100%',
+	},
+}))
 
-const Comments = () => {
-  const classes = useStyles();
-  return (
-    <Paper className={classes.background}>
-      <Grid container item direction='column'>
-        <CommentItem />
-        <CommentItem />
-      </Grid>
-    </Paper>
-  );
-};
+const Comments = ({ comments }) => {
+	const classes = useStyles()
+	console.log('comments', comments)
+	return (
+		<Paper className={classes.background}>
+			<Grid container item direction='column'>
+				{comments.map((comment) => (
+					<CommentItem comment={comment} />
+				))}
+			</Grid>
+		</Paper>
+	)
+}
 
-export default Comments;
+export default Comments
