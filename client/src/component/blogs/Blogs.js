@@ -65,6 +65,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Blogs = ({ displayTrending }) => {
 	const history = useHistory()
+	// console.log('****************************', history.location.search)
 
 	useEffect(() => {
 		console.log('Query params', history.location.search)
@@ -80,7 +81,7 @@ const Blogs = ({ displayTrending }) => {
 	const { blogs, loading, trending, notFound } = blog
 
 	localStorage.setItem('getBlogs', JSON.stringify(blogs))
-	console.log(history)
+	// console.log(history)
 	return (
 		<Grid container className={classes.root} justify='center'>
 			{/* <PageNavigation /> */}
