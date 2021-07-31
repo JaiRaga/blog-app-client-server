@@ -33,11 +33,14 @@ const useStyles = makeStyles((theme) => ({
 	},
 	paper: {
 		padding: '20px 0',
-		backgroundColor: '#34656d',
+		backgroundColor: '#082032',
 		// backgroundColor: '#0007',
 	},
+	linktext: {
+		textDecoration: 'none',
+	},
 	link: {
-		color: '#0a043c',
+		color: '#fff',
 		fontFamily: 'monospace',
 		fontSize: 19,
 		display: 'block',
@@ -188,8 +191,8 @@ const Login = () => {
 									align='center'
 									className={classes.footer}>
 									Already have an account?{' '}
-									<Link to='/login'>
-										<span className={classes.link}> Sign In</span>
+									<Link to='/login' className={classes.linktext}>
+										<span className={classes.link}> sign in</span>
 									</Link>
 								</Typography>
 							</Grid>
