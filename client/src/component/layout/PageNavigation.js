@@ -73,21 +73,21 @@ const PageNavigation = () => {
 					</ListItem>
 					<ListItem
 						button
-						onClick={() => history.push('/profile')}
+						onClick={() => history.push('/blogs')}
 						selected={path === '/0000' ? true : false}>
 						<ListItemIcon>
 							<PersonSharpIcon />
 						</ListItemIcon>
-						<ListItemText primary='Profile' />
+						<ListItemText primary='Blogs' />
 					</ListItem>
 					<ListItem
 						button
-						onClick={() => history.push('/setting')}
+						onClick={() => history.push('/about')}
 						selected={path === '/0000' ? true : false}>
 						<ListItemIcon>
 							<SettingsSharpIcon />
 						</ListItemIcon>
-						<ListItemText primary='Settings' />
+						<ListItemText primary='About' />
 					</ListItem>
 					<ListItem>
 						<CreateBlogBtn />
