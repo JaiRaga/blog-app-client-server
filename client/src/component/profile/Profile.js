@@ -1,13 +1,15 @@
 import React, { useEffect } from 'react'
 import { Grid, Avatar, CircularProgress } from '@material-ui/core'
+import { deepOrange } from '@material-ui/core/colors'
 import { makeStyles } from '@material-ui/styles'
 import { useSelector, useDispatch } from 'react-redux'
 import { getBlogsByMe } from '../../redux/actions/blog'
-import pic from '../../img/pic.jpg'
 
 const useStyles = makeStyles((theme) => ({
 	avatar: {
 		marginRight: 10,
+		color: theme.palette.getContrastText(deepOrange[500]),
+		backgroundColor: '#111d5e',
 	},
 	gridRight: {
 		marginRight: 'auto',
@@ -33,7 +35,9 @@ const Profile = () => {
 			alignItems='center'
 			className={classes.grid}>
 			<Grid container item justify='space-between' alignItems='center'>
-				<Avatar className={classes.avatar} alt='pic' src={user.avatar || pic} />
+				<Avatar className={classes.avatar} alt='pic' src={user.avatar}>
+					{user.username.split('')[0]}
+				</Avatar>
 				<Grid item className={classes.gridRight}>
 					<Grid container item direction='column'>
 						<Grid item>{user.username}</Grid>
