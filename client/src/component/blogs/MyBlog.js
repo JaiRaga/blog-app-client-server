@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
 	root: {
 		display: 'flex',
 		backgroundColor: theme.palette.background.default,
+		// height: '100vh',
 	},
 	loading: {
 		marginTop: 20,
@@ -46,6 +47,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 	comments: {
 		marginTop: 25,
+		marginBottom: 25,
 	},
 	commentTitle: {
 		marginLeft: 10,
@@ -134,7 +136,7 @@ const MyBlog = (prop) => {
 							<Typography variant='h3' className={classes.commentTitle}>
 								Comments
 							</Typography>
-							<Comments />
+							<Comments comments={blog.comments} />
 						</Grid>
 					</Grid>
 					{/* <Grid item className={classes.footer}>
