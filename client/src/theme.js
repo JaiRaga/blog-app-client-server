@@ -13,7 +13,7 @@ const theme = createMuiTheme({
 			main: '#d92027',
 		},
 		background: {
-			default: '#feceab',
+			default: '#fff',
 		},
 		update: {
 			main: '#ccc',
