@@ -1,6 +1,7 @@
 import React from 'react'
 import { Grid, makeStyles, Paper, Avatar } from '@material-ui/core'
 import { deepOrange, deepPurple } from '@material-ui/core/colors'
+import { useSelector } from 'react-redux'
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -36,12 +37,15 @@ const CommentItem = ({ comment }) => {
 		<Paper elevation={3} className={classes.spacing}>
 			<Grid container item alignItems='center' className={classes.root}>
 				<Grid item className={classes.items}>
-					<Avatar className={classes.purple}>R</Avatar>
+					<Avatar className={classes.purple}>{user.username[0]}</Avatar>
 				</Grid>
 				<Grid item className={classes.items}>
 					<Grid container item direction='column'>
 						<Grid item>{user.username}</Grid>
-						<Grid item>{user.handle}</Grid>
+						<Grid item>
+							{'-> '}
+							{user.handle}
+						</Grid>
 					</Grid>
 				</Grid>
 				<Grid item>{date}</Grid>
