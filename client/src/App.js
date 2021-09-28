@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react'
 import { Provider } from 'react-redux'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+
 // Private Route handler component
 import PrivateRoute from './component/routing/PrivateRoute'
 
 // Components
+import Landing from './component/layout/Landing'
 import About from './component/about/About'
 import Login from './component/auth/Login'
 import Register from './component/auth/Register'
@@ -47,6 +49,7 @@ function App() {
 				<Drawer />
 				<TrendingSideBar />
 				<Switch>
+					<Route exact path='/' component={Landing} />
 					<Route exact path='/login' component={Login} />
 					<Route exact path='/register' component={Register} />
 					<Route exact path='/search' component={Search} />
