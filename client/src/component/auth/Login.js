@@ -48,6 +48,10 @@ const useStyles = makeStyles((theme) => ({
 		marginTop: '20px',
 		color: '#fff',
 	},
+	outerContainer: {
+		backgroundColor: '#FBF4E9',
+		height: '100vh',
+	},
 }))
 
 const Login = () => {
