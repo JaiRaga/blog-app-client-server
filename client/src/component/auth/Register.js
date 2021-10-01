@@ -49,6 +49,10 @@ const useStyles = makeStyles((theme) => ({
 		marginTop: '20px',
 		color: '#fff',
 	},
+	outerContainer: {
+		backgroundColor: '#FBF4E9',
+		height: '100vh',
+	},
 }))
 
 const Login = () => {
@@ -85,7 +89,7 @@ const Login = () => {
 	}
 
 	return (
-		<Grid container justify='center'>
+		<Grid container justify='center' className={classes.outerContainer}>
 			<Grid item xs={10} md={6} className={classes.parentGrid}>
 				<Paper elevation={10} className={classes.paper}>
 					<Grid container justify='center' alignItems='center'>
