@@ -6,6 +6,7 @@ import {
 	Typography,
 	Button,
 } from '@material-ui/core'
+import { useHistory } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
 	items: {
@@ -24,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
 	divider: {
 		width: '100%',
 		color: theme.palette.primary.main,
+		marginTop: 40,
 	},
 	login: {
 		marginTop: 40,
@@ -35,6 +37,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Landing = () => {
 	const classes = useStyles()
+	const history = useHistory()
 	return (
 		<Grid container direction='column' justify='center' alignItems='center'>
 			<Grid
@@ -64,10 +67,16 @@ const Landing = () => {
 				<Typography variant='h5' className={classes.spacing}>
 					Login / Signup
 				</Typography>
-				<Button variant='outlined' className={classes.spacing}>
+				<Button
+					variant='outlined'
+					className={classes.spacing}
+					onClick={() => history.push('/login')}>
 					Login
 				</Button>
-				<Button variant='outlined' className={classes.spacing}>
+				<Button
+					variant='outlined'
+					className={classes.spacing}
+					onClick={() => history.push('/register')}>
 					Sign Up
 				</Button>
 			</Grid>
