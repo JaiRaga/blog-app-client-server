@@ -3,7 +3,6 @@ import {
 	Grid,
 	makeStyles,
 	Typography,
-	Button,
 	useMediaQuery,
 	Hidden,
 	CircularProgress,
@@ -12,12 +11,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import BlogItem from './BlogItem'
 import TrendingBlogs from '../trending/TrendingBlogs'
-import TrendingSideBar from '../trending/TrendingSideBar'
 import { useTheme } from '@material-ui/styles'
 import { getBlogs } from '../../redux/actions/blog'
-import Footer from '../layout/Footer'
-import { Skeleton } from '@material-ui/lab'
-import PageNavigation from '../layout/PageNavigation'
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -47,6 +42,8 @@ const useStyles = makeStyles((theme) => ({
 	},
 	trendings: {
 		margin: 5,
+		// backgroundColor: '#987',
+		marginLeft: 'auto',
 		padding: 5,
 		[theme.breakpoints.down('xs')]: {
 			display: 'none',
@@ -86,44 +83,56 @@ const Blogs = ({ displayTrending }) => {
 		<Grid container className={classes.root} justify='center'>
 			{/* <PageNavigation /> */}
 			{/* Displays blogs in th middle of the page */}
-			<Grid
-				item
-				xs={12}
-				sm={displayTrending === 'false' ? 12 : 6}
-				className={classes.blogs}>
-				<Grid
-					container
-					item
-					direction='column'
-					justify='center'
-					alignItems='center'>
-					{(loading || blogs.length) && !notFound === 0 ? (
-						<Grid
-							container
-							item
-							justify='center'
-							alignItems='center'
-							className={classes.loading}>
-							<CircularProgress />
-						</Grid>
-					) : (
-						<Fragment>
-							<Typography
-								variant='h4'
-								align='center'
-								className={classes.blogsTitle}>
-								{notFound ? 'No Blogs Found!' : 'Blogs'}
-							</Typography>
 
-							<Grid item>
-								{blogs.map((blog) => (
-									<BlogItem key={blog._id} blog={blog} />
-								))}
+			{loading ? (
+				<CircularProgress className={classes.loading} />
+			) : (
+				<Grid
+					item
+					xs={12}
+					sm={displayTrending === 'false' ? 12 : 6}
+					className={classes.blogs}>
+					<Grid
+						container
+						item
+						direction='column'
+						justify='center'
+						alignItems='center'>
+						{(loading || blogs.length) && !notFound === 0 ? (
+							<Grid
+								container
+								item
+								justify='center'
+								alignItems='center'
+								className={classes.loading}>
+								<CircularProgress />
 							</Grid>
-						</Fragment>
-					)}
+						) : (
+							<Fragment>
+								<Typography
+									variant='h4'
+									align='center'
+									className={classes.blogsTitle}>
+									{notFound ? 'No Blogs Found!' : 'Blogs'}
+								</Typography>
+
+								<Grid item>
+									{blogs.map((blog) => (
+										<BlogItem key={blog._id} blog={blog} />
+									))}
+								</Grid>
+							</Fragment>
+						)}
+					</Grid>
 				</Grid>
-			</Grid>
+			)}
+
+			{/* If the blogs are empty */}
+			{!loading && blogs.length === 0 && (
+				<Typography align='center' variant='h4'>
+					No Blogs Found...
+				</Typography>
+			)}
 
 			{/* Displays trending blogs to the right */}
 			{displayTrending !== 'false' ? (
