@@ -78,7 +78,7 @@ const Login = () => {
 	}
 
 	if (isAuthenticated) {
-		return <Redirect to='/blogs' />
+		return <Redirect to='/dashboard' />
 	}
 
 	return (
