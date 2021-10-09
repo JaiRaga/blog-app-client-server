@@ -13,10 +13,7 @@ import GetAppIcon from '@material-ui/icons/GetApp'
 import CheckIcon from '@material-ui/icons/Check'
 import VisibilityIcon from '@material-ui/icons/Visibility'
 import Comments from '../comments/Comments'
-import Footer from '../layout/Footer'
-import { useHistory, useLocation } from 'react-router-dom'
-import { getBlogs } from '../../redux/actions/blog'
-// import { loadUser } from '../../redux/actions/auth'
+import AddComment from '../comments/AddComment'
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -80,6 +77,11 @@ const MyBlog = (prop) => {
 
 	console.log('my blog', blog)
 
+	// Change the title case
+	const blogTitle = blog.title.split('')
+	blogTitle[0] = blogTitle[0].toUpperCase()
+	blogTitle.join('')
+
 	return (
 		<Fragment>
 			{!blog ? (
@@ -136,6 +138,7 @@ const MyBlog = (prop) => {
 							<Typography variant='h3' className={classes.commentTitle}>
 								Comments
 							</Typography>
+							<AddComment />
 							<Comments comments={blog.comments} />
 						</Grid>
 					</Grid>
