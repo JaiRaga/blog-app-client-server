@@ -13,9 +13,7 @@ import GetAppIcon from '@material-ui/icons/GetApp'
 import CheckIcon from '@material-ui/icons/Check'
 import VisibilityIcon from '@material-ui/icons/Visibility'
 import Comments from '../comments/Comments'
-import Footer from '../layout/Footer'
-import { useHistory, useLocation } from 'react-router-dom'
-import { getBlogs } from '../../redux/actions/blog'
+import AddComment from '../comments/AddComment'
 // import { loadUser } from '../../redux/actions/auth'
 
 const useStyles = makeStyles((theme) => ({
@@ -49,6 +47,9 @@ const useStyles = makeStyles((theme) => ({
 	},
 	commentTitle: {
 		marginLeft: 10,
+	},
+	addComment: {
+		margin: 10,
 	},
 	footer: {
 		marginTop: 'auto',
@@ -127,11 +128,14 @@ const Blog = (prop) => {
 						<Typography variant='h6'>{blog.body}</Typography>
 					</Grid>
 					<Divider className={classes.divider} />
-					<Grid item className={classes.comments}>
+					<Grid item className={classes.comments} md={7}>
 						<Grid container item direction='column' justify='flex-end'>
 							<Typography variant='h3' className={classes.commentTitle}>
 								Comments
 							</Typography>
+							<Grid item className={classes.addComment}>
+								<AddComment />
+							</Grid>
 							<Comments comments={comments} />
 						</Grid>
 					</Grid>
