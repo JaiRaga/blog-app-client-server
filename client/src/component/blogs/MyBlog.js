@@ -45,6 +45,7 @@ const useStyles = makeStyles((theme) => ({
 	comments: {
 		marginTop: 25,
 		marginBottom: 25,
+		width: '60%',
 	},
 	commentTitle: {
 		marginLeft: 10,
@@ -92,11 +93,12 @@ const MyBlog = (prop) => {
 				<Grid
 					container
 					className={classes.root}
+					xs={12}
 					direction='column'
 					justify='center'
 					alignItems='center'>
 					<Grid item>
-						<Typography variant='h1'>{blog.title}</Typography>
+						<Typography variant='h4'>{blog.title}</Typography>
 					</Grid>
 					<Grid item>
 						<Grid container item>
@@ -134,7 +136,7 @@ const MyBlog = (prop) => {
 					</Grid>
 					<Divider className={classes.divider} />
 					<Grid item className={classes.comments}>
-						<Grid container item direction='column' justify='flex-end'>
+						<Grid container item direction='column'>
 							<Typography variant='h3' className={classes.commentTitle}>
 								Comments
 							</Typography>
