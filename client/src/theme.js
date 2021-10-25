@@ -36,6 +36,11 @@ const theme = createMuiTheme({
 				color: '#fff',
 			},
 		},
+		MuiTextField: {
+			root: {
+				backgroundColor: 'gray',
+			},
+		},
 		MuiAutocomplete: {
 			inputFocused: {
 				color: '#fff',
