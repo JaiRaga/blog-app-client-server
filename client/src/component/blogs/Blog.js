@@ -44,12 +44,14 @@ const useStyles = makeStyles((theme) => ({
 	},
 	comments: {
 		marginTop: 25,
+		marginBottom: 25,
+		width: '60%',
 	},
 	commentTitle: {
 		marginLeft: 10,
 	},
 	addComment: {
-		margin: 10,
+		// margin: 10,
 	},
 	footer: {
 		marginTop: 'auto',
@@ -91,7 +93,7 @@ const Blog = (prop) => {
 					justify='center'
 					alignItems='center'>
 					<Grid item>
-						<Typography variant='h1'>{blog.title}</Typography>
+						<Typography variant='h4'>{blog.title}</Typography>
 					</Grid>
 					<Grid item>
 						<Grid container item>
