@@ -4,8 +4,10 @@ import CommentItem from './CommentItem'
 
 const useStyles = makeStyles((theme) => ({
 	background: {
-		backgroundColor: theme.palette.background.default,
+		backgroundColor: '#aaa',
 		width: '100%',
+		padding: '20px 0',
+		marginTop: 20,
 	},
 }))
 
@@ -13,17 +15,17 @@ const Comments = ({ comments }) => {
 	const classes = useStyles()
 	console.log('comments', comments)
 	return (
-		<Paper className={classes.background}>
-			<Grid container item direction='column'>
+		<Grid container item direction='column' xs={12}>
+			<Paper className={classes.background}>
 				{comments.length === 0 ? (
-					<Typography variant='body1' align='center'>
-						'No comments yet!'
+					<Typography variant='h6' align='center'>
+						No comments yet!
 					</Typography>
 				) : (
 					comments.map((comment) => <CommentItem comment={comment} />)
 				)}
-			</Grid>
-		</Paper>
+			</Paper>
+		</Grid>
 	)
 }
 
