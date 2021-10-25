@@ -1,21 +1,49 @@
-import React from 'react'
-import { Grid, Button, TextField } from '@material-ui/core'
+import React, { useState } from 'react'
+import { Grid, Button, TextField, makeStyles } from '@material-ui/core'
+
+const useStyles = makeStyles((theme) => ({
+	commentInput: {},
+	spacing: {
+		margin: '5px 0',
+	},
+}))
 
 const AddComment = () => {
+	const classes = useStyles()
+	const [openInputField, setOpenInputField] = useState(false)
 	return (
-		<Grid container item direction='column' justify='center'>
-			<Button variant='contained' color='primary'>
-				Add Comment
+		<Grid
+			container
+			item
+			direction='column'
+			justify='center'
+			className={classes.commentInput}>
+			<Button
+				variant='contained'
+				color='primary'
+				className={classes.spacing}
+				onClick={() => setOpenInputField((prev) => !prev)}>
+				{!openInputField ? 'Add Comment' : 'Close'}
 			</Button>
-			<TextField
-				id='add-comment'
-				label='Post a comment'
-				variant='filled'
-				multiline
-			/>
-			<Button variant='contained' color='primary'>
-				Submit
-			</Button>
+			{openInputField ? (
+				<>
+					<TextField
+						id='add-comment'
+						label='Post a comment'
+						variant='filled'
+						color='primary'
+						multiline
+						fullWidth
+						className={classes.spacing}
+					/>
+					<Button
+						variant='contained'
+						color='primary'
+						className={classes.spacing}>
+						Submit
+					</Button>{' '}
+				</>
+			) : null}
 		</Grid>
 	)
 }
