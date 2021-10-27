@@ -14,6 +14,7 @@ import CheckIcon from '@material-ui/icons/Check'
 import VisibilityIcon from '@material-ui/icons/Visibility'
 import Comments from '../comments/Comments'
 import AddComment from '../comments/AddComment'
+import BlogAuthor from './BlogAuthor'
 // import { loadUser } from '../../redux/actions/auth'
 
 const useStyles = makeStyles((theme) => ({
@@ -78,6 +79,8 @@ const Blog = (prop) => {
 	blog = blog[0]
 
 	const comments = blog.comments
+	const { username, _id } = blog.owner
+	const { createdAt } = blog
 
 	return (
 		<Fragment>
@@ -94,6 +97,7 @@ const Blog = (prop) => {
 					alignItems='center'>
 					<Grid item>
 						<Typography variant='h4'>{blog.title}</Typography>
+						<BlogAuthor id={_id} username={username} createdAt={createdAt} />
 					</Grid>
 					<Grid item>
 						<Grid container item>
