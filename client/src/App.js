@@ -59,6 +59,11 @@ function App() {
 					<PrivateRoute exact path='/myblog/:id' component={MyBlog} />
 					<PrivateRoute exact path='/blogs' component={Blogs} />
 					<PrivateRoute exact path='/profile' component={ProfileContainer} />
+					<PrivateRoute
+						exact
+						path='/profile/:id'
+						component={ProfileContainer}
+					/>
 					<PrivateRoute exact path='/tags' component={TagContainer} />
 					<PrivateRoute exact path='/setting' component={Setting} />
 
