@@ -19,7 +19,9 @@ const ProfileDisplayItem = ({ blog }) => {
 	return (
 		<div className={classes.grid} onClick={() => history.push(`/myblog/${id}`)}>
 			<Typography variant='h5'>{blog.title}</Typography>
-			<Typography variant='p'>{blog.body.slice(0, 30)}</Typography>
+			<Typography variant='subtitle2'>
+				{blog.body.slice(0, 30) + '...'}
+			</Typography>
 		</div>
 	)
 }
