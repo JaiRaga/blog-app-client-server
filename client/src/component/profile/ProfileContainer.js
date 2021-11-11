@@ -59,7 +59,7 @@ const ProfileContainer = ({ match }) => {
 			}
 		})
 	}
-	console.log(owner)
+	console.log('Random user', owner, ownerBlogs)
 
 	// Set Auth user
 	// if (user) setAuthUser(user)
@@ -79,7 +79,10 @@ const ProfileContainer = ({ match }) => {
 								<Profile owner={owner} />
 							</Grid>
 							<Grid item className={classes.grid} xs={12} md={6}>
-								<ProfileDisplay blogs={blogs} ownerBlogs={ownerBlogs} />
+								<ProfileDisplay
+									blogs={match.params.id ? ownerBlogs : blogs}
+									// ownerBlogs={ownerBlogs}
+								/>
 							</Grid>
 						</Grid>
 					</Grid>

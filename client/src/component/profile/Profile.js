@@ -25,7 +25,7 @@ const Profile = ({ owner }) => {
 
 	const user = useSelector((state) => state.auth.user)
 	const blogs = useSelector((state) => state.blog.currentUserBlogs)
-	console.log('Running')
+	// console.log('Running')
 
 	return (
 		<Grid

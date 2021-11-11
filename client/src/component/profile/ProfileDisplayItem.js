@@ -16,6 +16,7 @@ const ProfileDisplayItem = ({ blog }) => {
 	const classes = useStyles()
 	const history = useHistory()
 	const id = blog._id
+	console.log('random users blog', blog)
 	return (
 		<div className={classes.grid} onClick={() => history.push(`/myblog/${id}`)}>
 			<Typography variant='h5'>{blog.title}</Typography>
