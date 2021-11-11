@@ -19,12 +19,13 @@ const useStyles = makeStyles((theme) => ({
 	},
 }))
 
-const Profile = () => {
+const Profile = ({ owner }) => {
 	const classes = useStyles()
 	const dispatch = useDispatch()
 
 	const user = useSelector((state) => state.auth.user)
 	const blogs = useSelector((state) => state.blog.currentUserBlogs)
+	console.log('Running')
 
 	return (
 		<Grid
@@ -36,11 +37,11 @@ const Profile = () => {
 			className={classes.grid}>
 			<Grid container item justify='space-between' alignItems='center'>
 				<Avatar className={classes.avatar} alt='pic' src={user.avatar}>
-					{user.username.split('')[0]}
+					{owner ? owner.username.split('')[0] : user.username.split('')[0]}
 				</Avatar>
 				<Grid item className={classes.gridRight}>
 					<Grid container item direction='column'>
-						<Grid item>{user.username}</Grid>
+						<Grid item>{owner ? owner.username : user.username}</Grid>
 						<Grid item>Rating: {!user.rating ? 'NA' : user.rating}</Grid>
 					</Grid>
 				</Grid>
