@@ -7,6 +7,7 @@ import ProfileDisplay from './ProfileDisplay'
 import PageNavigation from '../layout/PageNavigation'
 import { loadUser } from '../../redux/actions/auth'
 import { getBlogsByMe } from '../../redux/actions/blog'
+import { useHistory } from 'react-router'
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -29,23 +30,43 @@ const useStyles = makeStyles((theme) => ({
 	},
 }))
 
-const ProfileContainer = () => {
+const ProfileContainer = ({ match }) => {
 	const classes = useStyles()
 	const dispatch = useDispatch()
+	const history = useHistory()
+
+	console.log(match.params.id)
 
 	useEffect(() => {
 		dispatch(loadUser())
 		dispatch(getBlogsByMe())
 	}, [])
 
+	const [authUser, setAuthUser] = useState(null)
 	const user = useSelector((state) => state.auth.user)
 	const blogs = useSelector((state) => state.blog.currentUserBlogs)
 	// stores user details for loading after page refresh.
 	localStorage.setItem('authUserBlogs', JSON.stringify(blogs))
+	const blogsById = useSelector((state) => state.blog.blogs)
+
+	// For /profile/:id
+	let owner, ownerBlogs
+	if (match.params.id) {
+		blogsById.forEach((blog) => {
+			if (blog.owner._id === match.params.id) {
+				owner = blog.owner
+				ownerBlogs = blogs
+			}
+		})
+	}
+	console.log(owner)
+
+	// Set Auth user
+	// if (user) setAuthUser(user)
 
 	return (
 		<Grid container justify='center' className={classes.root}>
-			{!user ? (
+			{!user || (match.params.id && !match) ? (
 				<Grid item className={classes.loading}>
 					<CircularProgress thickness={5} />
 				</Grid>
@@ -55,10 +76,10 @@ const ProfileContainer = () => {
 					<Grid item xs={12} sm={6} lg={8} className={classes.profileContent}>
 						<Grid container item justify='center'>
 							<Grid item xs={5} md={3} className={classes.grid}>
-								<Profile />
+								<Profile owner={owner} />
 							</Grid>
 							<Grid item className={classes.grid} xs={12} md={6}>
-								<ProfileDisplay blogs={blogs} />
+								<ProfileDisplay blogs={blogs} ownerBlogs={ownerBlogs} />
 							</Grid>
 						</Grid>
 					</Grid>
