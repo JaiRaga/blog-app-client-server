@@ -10,7 +10,7 @@ const ProfileDisplay = ({ blogs }) => {
 					<CircularProgress />
 				</Grid>
 			) : (
-				blogs.map((blog) => <ProfileDisplayItem blog={blog} />)
+				blogs.map((blog) => <ProfileDisplayItem key={blog._id} blog={blog} />)
 			)}
 		</Fragment>
 	)
